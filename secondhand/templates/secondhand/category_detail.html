@@ -1,0 +1,54 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Category - {{ category }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <ul class="inline">
+      {% if perms.secondhand.change_category %}
+        <li>
+          <a
+              href="{{ category.get_update_url }}"
+              class="button button-primary">
+            Edit Category</a></li>
+        {% endif %}
+        {% if perms.secondhand.delete_category %}
+        <li>
+          <a href="{{ category.get_delete_url }}"
+              class="button button-primary">
+            Delete Edit Category</a></li>
+        {% endif %}
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>Category Number:</th>
+                <td>{{ category.category_number}}</td>
+            </tr>
+            <tr>
+                <th>Category Name:</th>
+                <td>{{ category.category_name }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h3>Products</h3>
+        <ul>
+            {% for product in product_list %}
+                <li>
+                    <a href="{{ product.get_absolute_url }}">{{ product.product_name }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no products for this category.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+  </div></div> <!-- row -->
+</article>
+{% endblock %}

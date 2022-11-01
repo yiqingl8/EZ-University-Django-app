@@ -1,0 +1,19 @@
+    {% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Delete Address
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ address.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            address {{ address }}?
+        </p>
+        <a href="{{ address.get_absolute_url }}">Cancel</a>
+        <button type="submit" class="button button-primary">Delete Address</button>
+    </form>
+{% endblock %}

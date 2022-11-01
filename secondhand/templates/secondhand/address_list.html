@@ -1,0 +1,35 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Address List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.secondhand.add_address %}
+    <a
+        href="{% url 'secondhand_address_create_urlpattern' %}"
+        class="button button-primary">
+      Create New Address</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Address List</h2>
+    {% if perms.secondhand.add_address %}
+    <div class="mobile">
+      <a href="{% url 'secondhand_address_create_urlpattern' %}"
+       class="button button-primary">
+          Create New Address</a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for address in address_list %}
+            <li>
+                <a href="{{ address.get_absolute_url }}">{{ address }}</a>
+            </li>
+        {% empty %}
+        <li><em>There are currently no user addresses available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

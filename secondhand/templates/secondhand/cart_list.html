@@ -1,0 +1,34 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Cart List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.secondhand.add_cart %}
+    <a
+        href="{% url 'secondhand_cart_create_urlpattern' %}"
+        class="button button-primary">
+      Create New Cart</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Cart List</h2>
+    {% if perms.secondhand.add_cart %}
+    <div class="mobile">
+      <a href="{% url 'secondhand_cart_create_urlpattern' %}"
+       class="button button-primary">
+          Create New Cart</a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for cart in cart_list %}
+            <li>
+                <a href="{{ cart.get_absolute_url }}">{{ cart }}</a>
+            </li>
+        {% empty %}
+        <li><em>There are currently no carts available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

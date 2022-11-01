@@ -1,0 +1,25 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Error Deleting Category
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Category</h2>
+        <p>
+            You may not delete Category {{ category }}.  This
+            category currently has the following products
+        </p>
+
+        <ul>
+            {% for product in products %}
+            <li><a href="{{ product.get_absolute_url }}">{{ product}}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'secondhand_category_list_urlpattern' %}">Category List</a>.
+        </p>
+    </div>
+{% endblock %}

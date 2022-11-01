@@ -1,0 +1,34 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Cart Item List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.secondhand.add_cartitem %}
+    <a
+        href="{% url 'secondhand_cartitem_create_urlpattern' %}"
+        class="button button-primary">
+      Create New Cart Item</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Cart Item List</h2>
+    {% if perms.secondhand.add_cartitem %}
+    <div class="mobile">
+      <a href="{% url 'secondhand_cartitem_create_urlpattern' %}"
+       class="button button-primary">
+          Create New Cartitem</a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for cartitem in cartitem_list %}
+            <li>
+                <a href="{{ cartitem.get_absolute_url }}">{{ cartitem }}</a>
+            </li>
+        {% empty %}
+        <li><em>There are currently no items in cart.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Cartitem - {{ cartitem}}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ cartitem }}</h2>
+    <ul class="inline">
+        {% if perms.secondhand.change_cartitem %}
+        <li>
+          <a
+              href="{{ cartitem.get_update_url }}"
+              class="button button-primary">
+            Edit Cart Item</a></li>
+        {% endif %}
+        {% if perms.secondhand.delete_cartitem %}
+        <li>
+          <a href="{{ cartitem.get_delete_url }}"
+              class="button button-primary">
+            Delete Cart Item</a></li>
+        {% endif %}
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>Cart owner</th>
+                <td><a href="{{ cart.get_absolute_url }}">{{ cart }}</a></td>
+            </tr>
+            <tr>
+                <th>Item Name:</th>
+                <td><a href="{{ item.get_absolute_url }}">{{ item.product_name }}</a></td>
+            </tr>
+            <tr>
+                <th>Item Color:</th>
+                <td>{{ item.product_color }}</td>
+            </tr>
+            <tr>
+                <th>Item Price:</th>
+                <td>{{ item.product_price }}</td>
+            </tr>
+            <tr>
+                <th>Item Size:</th>
+                <td>{{ item.product_size }}</td>
+            </tr>
+        </table>
+    </section>
+  </div></div> <!-- row -->
+</article>
+{% endblock %}

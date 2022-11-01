@@ -1,0 +1,65 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Product - {{ product }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{product.category.category_name}}>>{{ product.product_name }}</h2>
+     <ul class="inline">
+        {% if perms.secondhand.change_product %}
+        <li>
+          <a
+              href="{{ product.get_update_url }}"
+              class="button button-primary">
+            Edit Products</a></li>
+        {% endif %}
+        {% if perms.secondhand.delete_product %}
+        <li>
+          <a href="{{ product.get_delete_url }}"
+              class="button button-primary">
+            Delete Products</a></li>
+        {% endif %}
+     </ul>
+
+        <section>
+        <table>
+            <tr>
+                <th>Product Category:</th>
+                <td><a href="{{ product.category.get_absolute_url }}">{{ product.category.category_name }}</a></td>
+            </tr>
+            <tr>
+                <th>Product Name:</th>
+                <td>{{ product.product_name }}</td>
+            </tr>
+            <tr>
+                <th>Product Color:</th>
+                <td>{{ product.product_color}}</td>
+
+            </tr>
+            <tr>
+                <th>Product Size:</th>
+                <td>{{ product.product_size}}</td>
+            </tr>
+            <tr>
+                <th>Product Price:</th>
+                <td>{{ product.product_price}}</td>
+            </tr>
+            <tr>
+                <th>Product Seller:</th>
+                <td><a href="{{ product.seller.get_absolute_url }}">{{ product.seller }}</a></td>
+            </tr>
+            <tr>
+                <th>Product Description:</th>
+                <td>{{ product.product_description}}</td>
+            </tr>
+
+        </table>
+    </section>
+  </div></div> <!-- row -->
+</article>
+{% endblock %}
+

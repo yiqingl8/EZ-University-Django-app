@@ -1,0 +1,87 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    User - {{ user }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ user }}</h2>
+    <ul class="inline">
+        {% if perms.secondhand.change_user %}
+        <li>
+          <a
+              href="{{ user.get_update_url }}"
+              class="button button-primary">
+            Edit User</a></li>
+        {% endif %}
+        {% if perms.secondhand.delete_user %}
+        <li>
+          <a href="{{ user.get_delete_url }}"
+              class="button button-primary">
+            Delete User</a></li>
+        {% endif %}
+     </ul>
+
+        <section>
+        <table>
+            <tr>
+                <th>User ID:</th>
+                <td>{{ user.user_id }}</td>
+            </tr>
+            <tr>
+                <th>First Name:</th>
+                <td>{{ user.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name:</th>
+                <td>{{ user.last_name}}</td>
+            </tr>
+            <tr>
+                <th>User Account:</th>
+                <td>{{user.account}}</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <h3>Orders</h3>
+        <ul>
+            {% for order in order_list %}
+                <li>
+                    <a href="{{ order.get_absolute_url}}">{{ order }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no orders for this user.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section>
+        <h3>Products</h3>
+        <ul>
+            {% for product in product_list %}
+                <li>
+                    <a href="{{ product.get_absolute_url }}">{{ product }}</a>
+                </li>
+            {% empty %}
+                <li><em>This user currently sells no product.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section>
+        <h3>Favorite List</h3>
+        <ul>
+            {% for cartitem in cart_list %}
+                <li>
+                    <a href="{{ cartitem.get_absolute_url }}">{{ cartitem }}'s cart</a>
+                </li>
+            {% empty %}
+                <li><em>This user currently has no favorite lists.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+  </div></div> <!-- row -->
+</article>
+{% endblock %}
+

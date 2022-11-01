@@ -1,0 +1,35 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Order Item List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.secondhand.add_orderitem %}
+    <a
+        href="{% url 'secondhand_orderitem_create_urlpattern' %}"
+        class="button button-primary">
+      Create New Order Item</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Order Item List</h2>
+    {% if perms.secondhand.add_address %}
+    <div class="mobile">
+      <a href="{% url 'secondhand_orderitem_create_urlpattern' %}"
+       class="button button-primary">
+          Create New Orderitem</a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for orderitem in orderitem_list %}
+            <li>
+                <a href="{{ orderitem.get_absolute_url }}">{{ orderitem }}</a>
+            </li>
+        {% empty %}
+        <li><em>There are currently no orderitems available.</em></li>
+        {% endfor %}
+    </ul>
+</html>
+{% endblock %}

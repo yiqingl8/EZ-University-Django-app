@@ -1,0 +1,15 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Create Order Item
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'secondhand_orderitem_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create Order Item</button>
+    </form>
+{% endblock %}

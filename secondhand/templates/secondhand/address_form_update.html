@@ -1,0 +1,15 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Update Address
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ address.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Address</button>
+    </form>
+{% endblock %}

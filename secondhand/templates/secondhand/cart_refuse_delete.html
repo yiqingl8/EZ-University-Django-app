@@ -1,0 +1,25 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Error Deleting Cart
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Cart</h2>
+        <p>
+            You may not delete Cart {{ cart }}.  This
+            cart currently has the following items
+        </p>
+
+        <ul>
+            {% for item in cartitems %}
+            <li><a href="{{ item.get_absolute_url }}">{{ item}}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'secondhand_cart_list_urlpattern' %}">Cart List</a>.
+        </p>
+    </div>
+{% endblock %}

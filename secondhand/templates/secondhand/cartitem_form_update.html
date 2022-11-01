@@ -1,0 +1,15 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Update Cartitem
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ cartitem.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Cart Item</button>
+    </form>
+{% endblock %}

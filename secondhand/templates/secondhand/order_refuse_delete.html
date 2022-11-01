@@ -1,0 +1,28 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Error Deleting Order
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Order</h2>
+        <p>
+            You may not delete Order {{ order }}.
+            This order currently has the following items or has the following address attached
+        </p>
+        <ul>
+            {% for orderitem in orderitems %}
+            <li><a href="{{ orderitem.item.get_absolute_url }}">{{ orderitem.item}}</a></li>
+            {%  endfor %}
+        </ul>
+        <ul>
+            {% for address in addresses %}
+            <li><a href="{{ address.get_absolute_url }}">ZIP Code:{{ address.ZIP_code }}. Name:{{ address.name }}</a></li>
+            {%  endfor %}
+        </ul>
+        <p>
+            Return to <a href="{% url 'secondhand_order_list_urlpattern' %}">Order List</a>.
+        </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Order - {{ order }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ order }}</h2>
+      <ul class="inline">
+        {% if perms.secondhand.change_order %}
+        <li>
+          <a
+              href="{{ order.get_update_url }}"
+              class="button button-primary">
+            Edit Order</a></li>
+        {% endif %}
+        {% if perms.secondhand.delete_order %}
+        <li>
+          <a href="{{ order.get_delete_url }}"
+              class="button button-primary">
+            Delete Edit Order</a></li>
+        {% endif %}
+      </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>User name:</th>
+                <td><a href="{{ user.get_absolute_url }}">{{ user }}</a></td>
+            </tr>
+            <tr>
+                <th>Order Date:</th>
+                <td>{{ order.order_date}}</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <h3>Order Items</h3>
+        <ul>
+            {% for orderitem in orderitem_list %}
+                <li>
+                    <a href="{{ orderitem.item.get_absolute_url }}">{{ orderitem.item.product_name }}-${{ orderitem.item.product_price}}</a>
+                </li>
+            {% empty %}
+                <li><em>This order currently has no items.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+        <section>
+        <h3>Delivery Address</h3>
+            <ul>
+            {% for address in address_list %}
+                <li>
+                    <a href="{{ address.get_absolute_url }}">ZIP Code:{{ address.ZIP_code }}. Name:{{ address.name }}</a>
+                </li>
+            {% empty %}
+                <li><em>This order currently has no address</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+  </div></div> <!-- row -->
+</article>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Cart - {{ cart }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>Cart of {{ cart.user}}</h2>
+    <ul class="inline">
+        {% if perms.secondhand.delete_cart %}
+        <li>
+          <a href="{{ cart.get_delete_url }}"
+              class="button button-primary">
+            Delete Cart</a></li>
+        {% endif %}
+     </ul>
+
+    <section>
+        <h3>Cart Items</h3>
+        <ul>
+            {% for cartitem in cartitem_list %}
+                <li>
+                    <a href="{{ cartitem.get_absolute_url }}">{{ cartitem }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no items for this cart.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+    </div></div> <!-- row -->
+</article>
+{% endblock %}

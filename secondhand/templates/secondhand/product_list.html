@@ -1,0 +1,56 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Product List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.secondhand.add_product %}
+    <a
+        href="{% url 'secondhand_product_create_urlpattern' %}"
+        class="button button-primary">
+      Create New Product</a>
+    {% endif %}
+{% endblock %}
+
+
+{% block org_content %}
+    <h2>Product List</h2>
+    {% if perms.secondhand.add_product %}
+    <div class="mobile">
+      <a href="{% url 'secondhand_product_create_urlpattern' %}"
+       class="button button-primary">
+          Create New Product</a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for product in product_list %}
+            <li>
+                <a href="{{ product.get_absolute_url }}">{{ product }}</a>
+            </li>
+        {% empty %}
+        <li><em>There are currently no products available.</em></li>
+        {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+    <ul>
+      {% if previous_page_url %}
+        <li>
+          <a href="{{ previous_page_url }}">
+            Previous</a>
+        </li>
+      {% endif %}
+      <li>
+        Page {{ product_list.number }}
+        of {{ paginator.num_pages }}
+      </li>
+      {% if next_page_url %}
+        <li>
+          <a href="{{ next_page_url }}">
+            Next</a>
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endblock %}

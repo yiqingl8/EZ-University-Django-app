@@ -1,0 +1,55 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Orderitem - {{ orderitem }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>Order{{ order.order_id }}-{{ item.product_name }}</h2>
+    <ul class="inline">
+        {% if perms.secondhand.change_orderitem %}
+        <li>
+          <a
+              href="{{ orderitem.get_update_url }}"
+              class="button button-primary">
+            Edit Orderitems</a></li>
+        {% endif %}
+        {% if perms.secondhand.delete_orderitem %}
+        <li>
+          <a href="{{ orderitem.get_delete_url }}"
+              class="button button-primary">
+            Delete Orderitems</a></li>
+        {% endif %}
+     </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>Buyer:</th>
+                <td><a href="{{ order.user.get_absolute_url }}">{{ order.user }}</a></td>
+            </tr>
+            <tr>
+                <th>Seller:</th>
+                <td><a href="{{ item.seller.get_absolute_url }}">{{ item.seller }}</a></td>
+            </tr>
+            <tr>
+                <th>Size:</th>
+                <td>{{ item.product_size }}</td>
+            </tr>
+            <tr>
+                <th>Color:</th>
+                <td>{{ item.product_color }}</td>
+            </tr>
+             <tr>
+                <th>Price:</th>
+                <td>{{ item.product_price }}</td>
+            </tr>
+        </table>
+    </section>
+  </div></div> <!-- row -->
+</article>
+{% endblock %}
+

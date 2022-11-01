@@ -1,0 +1,55 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Address - {{ address }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ address }}</h2>
+      <ul class="inline">
+        {% if perms.secondhand.change_address %}
+        <li>
+          <a
+              href="{{ address.get_update_url }}"
+              class="button button-primary">
+            Edit Address</a></li>
+        {% endif %}
+        {% if perms.secondhand.delete_address %}
+        <li>
+          <a href="{{ address.get_delete_url }}"
+              class="button button-primary">
+            Delete Address</a></li>
+        {% endif %}
+    </ul>
+
+        <section>
+        <table>
+            <tr>
+                <th>Receiver Name:</th>
+                <td>{{ address.name }}</td>
+            </tr>
+            <tr>
+                <th>Address Detail:</th>
+                <td>{{ address.address}}</td>
+            </tr>
+            <tr>
+                <th>Contact Phone:</th>
+                <td>{{ address.phone}}</td>
+            </tr>
+            <tr>
+                <th>Zip Code:</th>
+                <td>{{ address.ZIP_code}}</td>
+            </tr>
+            <tr>
+                <th>Order Number:</th>
+                <td>{{ address.order.order_id}}</td>
+            </tr>
+        </table>
+    </section>
+  </div></div>
+  </article>
+{% endblock %}
+

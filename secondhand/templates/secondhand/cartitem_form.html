@@ -1,0 +1,15 @@
+{% extends 'secondhand/base.html' %}
+
+{% block title %}
+    Create Cartitem
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'secondhand_cartitem_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create Cartitem</button>
+    </form>
+{% endblock %}
